@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+
+    <script type="text/javascript" src=" https://code.jquery.com/jquery-1.8.3.min.js"></script>
+
+ 
+  <link rel="stylesheet" type="text/css" href="http://cdn.kendostatic.com/2012.2.710/styles/kendo.common.min.css">
+  <link rel="stylesheet" type="text/css" href="http://cdn.kendostatic.com/2012.2.710/styles/kendo.default.min.css">
+  <link rel="stylesheet" type="text/css" href="http://cdn.kendostatic.com/2012.2.710/styles/kendo.bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="http://cdn.kendostatic.com/2012.2.710/styles/kendo.bootstrap.mobile.min.css">
+
+  
+  <script type="text/javascript" src="http://cdn.kendostatic.com/2012.2.710/js/kendo.all.min.js"></script>
+
+
+  <title>KendoUI schema exapmle </title>
+
+  
+    
+
+
+
+
+
+  
+</head>
+
+<body>
+  	<div id="grid"></div>
+  
+ 
+
+</body>
+
+</html>
+
+<script type='text/javascript'>
+$( document ).ready(function() {
+            var data = [{
+                "CompanyId" : 20,
+                "CompanyName" : "Walmart",
+                "CompanyContacts" : [{
+                    "CompanyId" : 20,
+                    "FirstName" : "Bob",
+                    "LastName" : "Green",
+                    "Email" : "bob@test.com",
+                    "Phone" : "1234567",
+                    "IsActive" : false
+                }]
+            },{
+                "CompanyId" : 10,
+                "CompanyName" : "Publix",
+                "CompanyContacts" : [{
+                    "CompanyId" : 10,
+                    "FirstName" : "Joe",
+                    "LastName" : "Blue",
+                    "Email" : "bob@test.com",
+                    "Phone" : "1234567",
+                    "IsActive" : true
+                }]
+            }]
+
+            var mySchema = kendo.data.Model.define({
+                id : "CompanyId",
+                fields : {
+                	CompanyId : {
+                        type : "number"
+                   },
+                	CompanyName : {
+                        type : "string"
+                    } 
+                }
+            });
+
+            $(document).ready(function() {
+                $("#grid").kendoGrid({
+                    dataSource : {
+                        data : data,
+                        schema : {
+                        	model: mySchema
+                        },
+                        pageSize : 10
+                    },
+                    height : 250,
+                    scrollable : true,
+                    sortable : true,
+                    filterable : true,
+                    pageable : {
+                        input : true,
+                        numeric : false
+                    },
+                    columns : [
+                    {
+                        field : "CompanyName",
+                        title: "Company Name"
+                    },{
+                        field : "CompanyId",
+                         title: "Company ID"
+                    }, {
+                        field : "CompanyContacts[0].FirstName",
+                         title: "First Name"
+                    },{
+                        field : "CompanyContacts[0].LastName",
+                         title: "Last Name"
+                    },{
+                        field : "CompanyContacts[0].Email",
+                         title: "Email"
+                    },{
+                        field : "CompanyContacts[0].Phone",
+                         title: "Phone"
+                    },{
+                        field : "CompanyContacts[0].FirstName",
+                         title: "IsActive"
+                    }]
+                });
+            });
+});
+
+</script>
